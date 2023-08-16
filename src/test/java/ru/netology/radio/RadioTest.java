@@ -3,6 +3,7 @@ package ru.netology.radio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 public class RadioTest {
     @Test
     public void shouldSetRadioStation() {
@@ -17,9 +18,24 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldNotSetRadioStationAboveMax() {
+    public void shouldRadioWithQuantityRadioStation() {
+        Radio radio = new Radio(21);
+
+        Assertions.assertEquals(20, radio.getMaxRadioStation());
+        Assertions.assertEquals(0, radio.getCurrentRadioStation());
+    }
+
+    @Test
+    public void shouldRadio() {
         Radio radio = new Radio();
 
+        Assertions.assertEquals(9, radio.getMaxRadioStation());
+        Assertions.assertEquals(0, radio.getCurrentRadioStation());
+    }
+
+    @Test
+    public void shouldNotSetRadioStationAboveMax() {
+        Radio radio = new Radio();
         radio.setCurrentRadioStation(10);
 
         int expected = 0;
@@ -55,9 +71,9 @@ public class RadioTest {
 
     @Test
     public void shouldNextRadioStationAboveMax() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(21);
 
-        radio.setCurrentRadioStation(9);
+        radio.setCurrentRadioStation(20);
 
         radio.next();
 
@@ -85,11 +101,11 @@ public class RadioTest {
 
     @Test
     public void shouldNotPrevRadioStation() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(21);
 
         radio.prev();
 
-        int expected = 9;
+        int expected = 20;
         int actual = radio.getCurrentRadioStation();
 
         Assertions.assertEquals(expected, actual);
